@@ -1,0 +1,105 @@
+---
+import { callSafely } from "astro:actions";
+
+const nombres = [
+  {
+    puesto: "Candidato",
+    nombre: "Kamal El Faghloumi",
+    img: "/images/una.png",
+    // posicion: "col-span-2 row-span-2",
+  },
+  {
+    puesto: "Portavoz",
+    nombre: "Kevin Melo Riascos",
+    img: "/images/una.png",
+    // posicion: "col-span-2 row-span-2 col-start-3",
+  },
+  {
+    puesto: "Jefa de Campana",
+    nombre: "María Nieto Romera",
+    img: "/images/una.png",
+    // posicion: "col-span-2 row-span-2 row-start-3",
+  },
+  {
+    puesto: "Estrategia",
+    nombre: "Denisa Marina Vrabie",
+    img: "/images/una.png",
+    // posicion: "col-span-2 row-span-2 col-start-3 row-start-3",
+  },
+  {
+    puesto: "Party tank de Investigacion",
+    nombre: "Patricia Marco Cortés",
+    img: "/images/una.png",
+    // posicion: "col-span-2 row-span-2 row-start-5",
+  },
+  {
+    puesto: "Party tank de Ideologia",
+    nombre: "Daniela Mirabelli Huete",
+    img: "/images/una.png",
+    // posicion: "col-span-2 row-span-2 col-start-3 row-start-5",
+  },
+  {
+    puesto: "RRPP",
+    nombre: "Leire Martínez Román",
+    img: "/images/una.png",
+    // posicion: "col-span-2 row-span-2 row-start-7",
+  },
+  {
+    puesto: "Protocolo y Eventos",
+    nombre: "Macarena Fuentes Gómez",
+    img: "/images/una.png",
+    // posicion: "col-span-2 row-span-2 col-start-3 row-start-7",
+  },
+  {
+    puesto: "Creacion de contenido",
+    nombre: "Maria Alejandra Tovar",
+    img: "/images/una.png",
+    posicion: "col-start-2",
+  },
+  {
+    puesto: "Creacion de Contenido",
+    nombre: "Francisco Javier Botella Retamal",
+    img: "/images/una.png",
+    posicion: "col-start-3",
+  },
+];
+---
+
+<section
+  id="equipo"
+  class="lg:min-h-[95vh] bg-(--red) text-white pt-1 flex flex-col justify-center"
+>
+  <h2 class="font-extrabold text-center text-4xl lg:text-8xl my-8">EQUIPO</h2>
+  <div
+    class="grid grid-cols-4 grid-rows-4 gap-2 lg:gap-10 justify-items-center items-center px-4"
+  >
+    {
+      nombres.map((persona) => (
+        <a
+          id="persona"
+          class={
+            persona.posicion +
+            " flex flex-col  justify-center items-center w-full h-full bg-amber-200"
+          }
+        >
+          <img
+            class="m-auto lg:w-1/4"
+            src={persona.img}
+            alt={persona.nombre + " " + persona.puesto}
+          />
+        </a>
+      ))
+    }
+    <div class="col-span-4 row-start-4 w-full pb-20">
+      <p class="text-xs md:text-lg text-center">
+        Tu y tus valiosas aportaciones
+      </p>
+      <p class="text-xs md:text-lg bg-white mt-4 p-5 md:p-10 rounded-lg">asd</p>
+    </div>
+  </div>
+</section>
+<style>
+  #persona {
+    clip-path: circle();
+  }
+</style>

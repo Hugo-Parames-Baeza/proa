@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/header/Nav.astro";
+import Copy from "../components/sections/Copy.astro";
+---
+
+<Layout>
+    <header>
+        <Nav/>
+    </header>
+    <main class="px-[10vw] md:px-[20vw] py-5 flex flex-col">
+        <Copy/>
+        <a href="/" class="text-(--red) underline m-auto">Volver</a>
+    </main>
+</Layout>
