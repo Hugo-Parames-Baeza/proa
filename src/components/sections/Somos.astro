@@ -1,6 +1,6 @@
 ---
 import somos from '../../assets/images/somos-bg.webp'
-const somosUrl = somos.src;
+const somosUrl = `url(${somos.src})`;
 ---
 
 <section class=" text-white bg-cover bg-center lg:h-[95vh] flex justify-between">
@@ -21,6 +21,6 @@ const somosUrl = somos.src;
 </section>
 <style define:vars={{somosUrl}}>
     section{
-        background-image: url(var(--somosUrl));
+        background-image: var(--somosUrl);
     }
 </style>

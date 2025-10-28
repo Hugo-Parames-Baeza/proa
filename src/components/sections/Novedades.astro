@@ -1,6 +1,6 @@
 ---
 import kamal from "../../assets/images/kamal.webp";
-const fondoKamal = kamal.src;
+const fondoKamal = `url(${kamal.src})`;
 ---
 
 <section
@@ -24,7 +24,7 @@ const fondoKamal = kamal.src;
         <span class="text-2xl">Meeting</span> con Kamal
       </h3>
       <a href="#" class="bg-white p-1 rounded-lg text-xs font-bold mx-auto"
-        >Ver mas</a
+        >Ver más</a
       >
     </div>
     <div
@@ -58,6 +58,6 @@ const fondoKamal = kamal.src;
     filter: blur(2px);
   }
   div#bgk{
-    background-image: url(var(--fondoKamal));
+    background-image: var(--fondoKamal);
   }
 </style>
