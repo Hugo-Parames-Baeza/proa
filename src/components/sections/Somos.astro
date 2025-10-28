@@ -1,20 +1,26 @@
 ---
-
+import somos from '../../assets/images/somos-bg.webp'
+const somosUrl = somos.src;
 ---
 
-<section class=" text-white bg-cover bg-center bg-[url(/images/somos-bg.webp)] lg:h-[95vh] flex justify-between">
+<section class=" text-white bg-cover bg-center lg:h-[95vh] flex justify-between">
     <div class="py-6 pl-2 lg:pl-6 pt-20 w-3/5 m-0 h-full bg-linear-to-r from-(--red) from-60% to-transparent flex flex-col justify-end">
         <h2 class="text-4xl md:text-6xl lg:text-8xl font-bold w-11/12">
             SOMOS
         </h2>
         <p class="text-xs md:text-xl lg:text-3xl leading-none text-justify w-10/12 md:w-11/12">
             Somos el partido que impulsa oportunidades para todos y protege la
-            justicia y libertad, derechos basicos de todos los ciudadanos.
+            justicia y libertad, derechos básicos de todos los ciudadanos.
         </p>
     </div>
         <div class="py-6 pl-2 lg:pl-6 pt-20 w-2/5 lg:w-2/5 flex justify-center items-end">
         <a href="ideologia" class="text-(--red) font-bold bg-white text-center px-8 py-2 rounded-2xl text-xs md:text-xl lg:text-3xl leading-none w-10/12 md:w-7/12 hover:bg-red-100 duration-100 ease-in">
-            Ideologia
+            Ideología
         </a>
     </div>
 </section>
+<style define:vars={{somosUrl}}>
+    section{
+        background-image: url(var(--somosUrl));
+    }
+</style>
