@@ -1,15 +1,15 @@
 ---
 import { callSafely } from "astro:actions";
-import _1 from '../../assets/images/team/6.jpg'
-import _2 from '../../assets/images/team/3.webp'
-import _3 from '../../assets/images/team/4.jpg'
-import _4 from '../../assets/images/team/7.jpg'
-import _5 from '../../assets/images/team/2.jpg'
-import _6 from '../../assets/images/team/10.jpg'
-import _7 from '../../assets/images/team/5.jpg'
-import _8 from '../../assets/images/team/9.jpg'
-import _9 from '../../assets/images/team/1.jpg'
-import _10 from '../../assets/images/team/8.jpg'
+import _1 from "../../assets/images/team/6.jpg";
+import _2 from "../../assets/images/team/3.webp";
+import _3 from "../../assets/images/team/4.jpg";
+import _4 from "../../assets/images/team/7.jpg";
+import _5 from "../../assets/images/team/2.jpg";
+import _6 from "../../assets/images/team/10.jpg";
+import _7 from "../../assets/images/team/5.jpg";
+import _8 from "../../assets/images/team/9.jpg";
+import _9 from "../../assets/images/team/1.jpg";
+import _10 from "../../assets/images/team/8.jpg";
 import { Image } from "astro:assets";
 
 const nombres = [
@@ -66,23 +66,20 @@ const nombres = [
     posicion: "col-start-3",
   },
 ];
+const miembros = JSON.stringify(nombres);
 ---
 
 <section
   id="equipo"
-  class=" bg-(--red) text-white pt-1 flex flex-col justify-center"
+  class="bg-(--red) text-white pt-1 flex flex-col justify-center"
 >
   <h2 class="font-extrabold text-center text-4xl lg:text-8xl my-8">EQUIPO</h2>
   <div
     class="grid grid-cols-4 grid-rows-3 gap-2 lg:gap-10 justify-items-center items-center px-4"
   >
     {
-      nombres.map((persona) => (
-        <a
-          class={
-            persona.posicion
-          }
-        >
+      nombres.map((persona, i) => (
+        <a data-id={i} class={persona.posicion}>
           <Image
             src={persona.img}
             alt={persona.nombre + " " + persona.puesto}
@@ -91,39 +88,82 @@ const nombres = [
         </a>
       ))
     }
-    
+  </div>
 </section>
+
 <style>
   a {
     clip-path: circle();
     opacity: 0;
     transform: translateY(100px);
   }
-
-  a.an{
+  
+  a.an {
     animation: aparicion 1000ms ease 0s 1 forwards running;
   }
 
   @keyframes aparicion {
-    from{
+    from {
       opacity: 0;
       transform: translateY(100px);
     }
-    to{
+    to {
       opacity: 1;
       transform: translateY(0);
     }
   }
 </style>
-<script>
-  const members = document.querySelectorAll('a')
-  document.addEventListener('scroll', e=>{
-    members.forEach(element => {
+<script define:vars={{miembros}}>
+  const equipo = JSON.parse(miembros)
+  console.log(equipo)
+  const body = document.querySelector("body");
+  const members = document.querySelectorAll("a");
+  document.addEventListener("scroll", (e) => {
+    members.forEach((element) => {
       const rect = element.getBoundingClientRect();
       const activationPoint = window.innerHeight * 0.75;
-      if(rect.top <= activationPoint && rect.bottom>0){
-        element.classList.add('an')
+      if (rect.top <= activationPoint && rect.bottom > 0) {
+        element.classList.add("an");
       }
     });
-  })
+  });
+  members.forEach((m) => {
+    m.addEventListener("click", (e) => {
+      e.preventDefault();
+      const id = m.dataset.id;
+      const person = equipo[id];
+      body.insertAdjacentHTML('beforeend',`<div id="imagen" class="fixed bg-[#af79796b] w-full flex top-0 h-screen">
+    <button
+      class="absolute text-white top-20 right-10 w-10 hover:text-gray-200 cursor-pointer flex flex-col"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="currentColor"
+        class="bi bi-x-circle-fill"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"
+        ></path>
+      </svg>
+    </button>
+    <div style="opacity:0; transform:translateY(100px); animation: aparicion 1000ms ease 0s 1 forwards running;" class="m-auto w-1/4 bg-(--red) rounded-4xl p-2">
+      <Image
+        src=${person.img.src}
+        alt="${person.nombre} ${person.puesto}""
+        class="persona rounded-4xl"
+      />
+      <div class="p-4">
+        <p class="text-4xl text-center text-white font-extrabold">${person.nombre}</p>
+        <p class="text-2xl text-center text-white font-extrabold">${person.puesto}</p>
+      </div>
+    </div>
+  </div>`);
+      const modal = body.querySelector("#imagen");
+      if (modal) {
+        const close = modal.querySelector("button");
+        close?.addEventListener("click", () => modal.remove());
+      }
+    });
+  });
 </script>
