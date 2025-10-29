@@ -69,7 +69,7 @@ const parsed = JSON.stringify(posts);
         ${post.titulo}
       </h2>
       ${post.parrafos.map((para) => `<p class="px-10 text-justify mb-10">${para}</p>`).join("")}
-      <button id="close-modal" class="text-(--red) w-1/12 md:w-1/24 lg:w-1/36 m-auto mb-10 hover:text-red-950">
+      <button id="close-modal" class="text-(--red) w-1/12 md:w-1/24 lg:w-1/36 m-auto mb-10 hover:text-red-950 cursor-pointer">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="currentColor"
@@ -86,8 +86,11 @@ const parsed = JSON.stringify(posts);
       );
       const modal = body.querySelector("#article");
       if (modal) {
-        const close = modal.querySelector("button");
-        close?.addEventListener("click", () => modal.remove());
+        modal.addEventListener("click", (e) => {
+          if (e.target.id == "article" || ['svg', 'path', 'button'].includes(e.target.nodeName)) {
+            modal.remove();
+          }
+        });
       }
     });
   });
