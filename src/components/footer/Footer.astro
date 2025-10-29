@@ -1,12 +1,95 @@
 ---
 
 ---
-<form id="contacto" class="h-[40dvh] lg:h-[60vh] text-xs grid grid-cols-4 grid-rows-5 gap-1 p-5 justify-items-center items-start">
-    <h2 class="font-extrabold text-(--red) text-center text-4xl 2xl:text-6xl col-span-4 col-start-1 row-start-1">CONTACTO</h2>
-    <input type="text" class="rounded p-2 w-full col-start-1 row-start-2 border border-(--red)" placeholder="Nombre" name="nombre" required>
-    <input type="text" class="rounded p-2 w-full col-start-2 row-start-2 border border-(--red)" placeholder="Apellidos" name="apellidos" required>
-    <input class="rounded p-2 w-full col-span-2 col-start-1 row-start-3 border border-(--red)" placeholder="Correo electrónico" name="email" required type="email">
-    <input class="rounded p-2 w-full col-span-2 col-start-1 row-start-4 border border-(--red)" placeholder="Código postal" type="text" name="codigo_postal" required>
-    <textarea class="rounded p-2 w-full col-span-2 row-span-4 col-start-3 row-start-2 border border-(--red) self-stretch" name="mensaje" required placeholder="Mensaje"></textarea>
-    <input class="col-span-2 row-start-5 bg-(--red) hover:bg-red-300 px-3 py-2 text-white font-bold rounded-lg" type="submit" value="Enviar">
-</form>
+
+<section class="min-h-[40dvh] p-4 lg:min-h-[60vh] flex">
+  <form
+    id="contacto"
+    class="m-auto grid text-xs gap-2 p-5 justify-items-center items-center md:w-1/2 lg:w-1/3 md:gap-4 md:bg-(--red) rounded-xl shadow-2xl bg-white"
+  >
+    <h2
+      class="font-extrabold text-(--red) md:text-white text-center text-4xl 2xl:text-6xl"
+    >
+      CONTACTO
+    </h2>
+    <input
+      type="text"
+      class="rounded-xl p-2 w-full border border-(--red) bg-white focus:outline-red-300 shadow"
+      placeholder="Nombre"
+      name="nombre"
+      required
+    />
+    <input
+      type="text"
+      class="rounded-xl p-2 w-full border border-(--red) bg-white focus:outline-red-300 shadow"
+      placeholder="Apellidos"
+      name="apellidos"
+      required
+    />
+    <input
+      class="rounded-xl p-2 w-full border border-(--red) bg-white focus:outline-red-300 shadow"
+      placeholder="Correo electrónico"
+      name="email"
+      required
+      type="email"
+    />
+    <input
+      class="rounded-xl p-2 w-full border border-(--red) bg-white focus:outline-red-300 shadow"
+      placeholder="Código postal"
+      type="text"
+      name="codigo_postal"
+      required
+    />
+    <textarea
+      class="rounded-xl p-2 w-full border border-(--red) self-stretch bg-white focus:outline-red-300 shadow"
+      name="mensaje"
+      required
+      placeholder="Mensaje"></textarea>
+    <input
+      class="bg-(--red) md:bg-white md:text-(--red) hover:bg-red-300 px-3 py-2 text-white font-bold rounded-lg cursor-pointer"
+      type="submit"
+      value="Enviar"
+    />
+  </form>
+</section>
+<style>
+  form {
+    grid-template-areas:
+      "head head head head"
+      "nombre apellidos textarea textarea"
+      "correo correo textarea textarea"
+      "codigo codigo textarea textarea"
+      "boton boton textarea textarea";
+  }
+  h2 {
+    grid-area: head;
+  }
+  input[name="nombre"] {
+    grid-area: nombre;
+  }
+  input[name="apellidos"] {
+    grid-area: apellidos;
+  }
+  input[name="email"] {
+    grid-area: correo;
+  }
+  input[name="codigo_postal"] {
+    grid-area: codigo;
+  }
+  textarea {
+    grid-area: textarea;
+  }
+  input[type="submit"] {
+    grid-area: boton;
+  }
+  @media (width>=768px) {
+    form {
+      grid-template-areas:
+      "head head"
+      "nombre apellidos"
+      "correo codigo"
+      "textarea textarea"
+      "boton boton";;
+    }
+  }
+</style>
