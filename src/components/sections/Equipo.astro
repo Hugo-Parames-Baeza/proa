@@ -1,65 +1,68 @@
 ---
 import { callSafely } from "astro:actions";
+import _1 from '../../assets/images/team/6.jpg'
+import _2 from '../../assets/images/team/3.webp'
+import _3 from '../../assets/images/team/4.jpg'
+import _4 from '../../assets/images/team/7.jpg'
+import _5 from '../../assets/images/team/2.jpg'
+import _6 from '../../assets/images/team/10.jpg'
+import _7 from '../../assets/images/team/5.jpg'
+import _8 from '../../assets/images/team/9.jpg'
+import _9 from '../../assets/images/team/1.jpg'
+import _10 from '../../assets/images/team/8.jpg'
+import { Image } from "astro:assets";
 
 const nombres = [
   {
+    puesto: "Jefa de Campaña",
+    nombre: "María Nieto Romera",
+    img: _1,
+  },
+  {
     puesto: "Candidato",
     nombre: "Kamal El Faghloumi",
-    img: "/images/una.png",
-    // posicion: "col-span-2 row-span-2",
+    img: _2,
   },
   {
     puesto: "Portavoz",
     nombre: "Kevin Melo Riascos",
-    img: "/images/una.png",
-    // posicion: "col-span-2 row-span-2 col-start-3",
-  },
-  {
-    puesto: "Jefa de Campana",
-    nombre: "María Nieto Romera",
-    img: "/images/una.png",
-    // posicion: "col-span-2 row-span-2 row-start-3",
+    img: _3,
   },
   {
     puesto: "Estrategia",
     nombre: "Denisa Marina Vrabie",
-    img: "/images/una.png",
-    // posicion: "col-span-2 row-span-2 col-start-3 row-start-3",
+    img: _4,
   },
   {
     puesto: "Party tank de Investigacion",
     nombre: "Patricia Marco Cortés",
-    img: "/images/una.png",
-    // posicion: "col-span-2 row-span-2 row-start-5",
+    img: _5,
   },
   {
     puesto: "Party tank de Ideologia",
     nombre: "Daniela Mirabelli Huete",
-    img: "/images/una.png",
-    // posicion: "col-span-2 row-span-2 col-start-3 row-start-5",
+    img: _6,
   },
   {
     puesto: "RRPP",
     nombre: "Leire Martínez Román",
-    img: "/images/una.png",
-    // posicion: "col-span-2 row-span-2 row-start-7",
+    img: _7,
   },
   {
     puesto: "Protocolo y Eventos",
     nombre: "Macarena Fuentes Gómez",
-    img: "/images/una.png",
-    // posicion: "col-span-2 row-span-2 col-start-3 row-start-7",
+    img: _8,
   },
   {
     puesto: "Creacion de contenido",
     nombre: "Maria Alejandra Tovar",
-    img: "/images/una.png",
+    img: _9,
     posicion: "col-start-2",
   },
   {
     puesto: "Creacion de Contenido",
     nombre: "Francisco Javier Botella Retamal",
-    img: "/images/una.png",
+    img: _10,
     posicion: "col-start-3",
   },
 ];
@@ -67,39 +70,60 @@ const nombres = [
 
 <section
   id="equipo"
-  class="lg:min-h-[95vh] bg-(--red) text-white pt-1 flex flex-col justify-center"
+  class=" bg-(--red) text-white pt-1 flex flex-col justify-center"
 >
   <h2 class="font-extrabold text-center text-4xl lg:text-8xl my-8">EQUIPO</h2>
   <div
-    class="grid grid-cols-4 grid-rows-4 gap-2 lg:gap-10 justify-items-center items-center px-4"
+    class="grid grid-cols-4 grid-rows-3 gap-2 lg:gap-10 justify-items-center items-center px-4"
   >
     {
       nombres.map((persona) => (
         <a
-          id="persona"
           class={
-            persona.posicion +
-            " flex flex-col  justify-center items-center w-full h-full bg-amber-200"
+            persona.posicion
           }
         >
-          <img
-            class="m-auto lg:w-1/4"
+          <Image
             src={persona.img}
             alt={persona.nombre + " " + persona.puesto}
+            class="persona"
           />
         </a>
       ))
     }
-    <div class="col-span-4 row-start-4 w-full pb-20">
-      <p class="text-xs md:text-lg text-center">
-        Tu y tus valiosas aportaciones
-      </p>
-      <p class="text-xs md:text-lg bg-white mt-4 p-5 md:p-10 rounded-lg">asd</p>
-    </div>
-  </div>
+    
 </section>
 <style>
-  #persona {
+  a {
     clip-path: circle();
+    opacity: 0;
+    transform: translateY(100px);
+  }
+
+  a.an{
+    animation: aparicion 1000ms ease 0s 1 forwards running;
+  }
+
+  @keyframes aparicion {
+    from{
+      opacity: 0;
+      transform: translateY(100px);
+    }
+    to{
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 </style>
+<script>
+  const members = document.querySelectorAll('a')
+  document.addEventListener('scroll', e=>{
+    members.forEach(element => {
+      const rect = element.getBoundingClientRect();
+      const activationPoint = window.innerHeight * 0.75;
+      if(rect.top <= activationPoint && rect.bottom>0){
+        element.classList.add('an')
+      }
+    });
+  })
+</script>

@@ -1,0 +1,93 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/header/Nav.astro";
+import { Image } from "astro:assets";
+import Dana from "../assets/images/blog.webp";
+
+const posts = [
+  {
+    titulo:
+      "DANA en Valencia: en defensa de la verdad, la memoria y la responsabilidad compartida.",
+    parrafos: [
+      "Hace un año, la DANA de Valencia dejó una de las mayores tragedias humanas y sociales de la historia de España más reciente. Los juzgados han elevado la cifra oficial de víctimas a 229 personas, de las cuales 107 eran mayores de 70 años, según datos de El País. Esta catástrofe no sólo devastó los hogares de muchos ciudadanos, sino también la confianza en la capacidad de los gobiernos para actuar cada vez que nuestro país sufre.",
+      "La respuesta de la sociedad ante esta tragedia fue inmediata y ejemplar: según BBC News, se produjo una auténtica “pasarela de solidaridad”, una oleada de voluntarios que cruzaron los puentes del nuevo cauce del Turia para ayudar a los municipios más afectados cargados con palas, cubos, escobas, agua y comida. Miles de personas se desplazaron a pie durante kilómetros para llevar suministros y colaborar en las tareas de limpieza, convirtiéndose en un símbolo de la solidaridad más espontánea y masiva. La Cruz Roja, por su parte, atendió a más de 228.000 personas afectadas en una operación de emergencia calificada por RTVE como “sin precedentes”. Sin embargo, esta crisis también expuso las carencias estructurales del sistema de protección social: diferentes asociaciones denunciaron que alrededor de 40.000 personas migrantes quedaron excluidas de las ayudas públicas por no tener DNI o NIE en vigor, lo que vulnera los principios de justicia e igualdad recogidos en el Artículo 1 de la Constitución Española. Desde PROA defendemos una regularización por circunstancias excepcionales que permita que la ayuda llegue a todas las personas damnificadas, sin importar su origen o situación administrativa.",
+      "Mientras la ciudadanía demostraba su compromiso con los vecinos afectados, la desinformación golpeaba el centro de esa solidaridad: en el centro de la emergencia, el Ayuntamiento de Alfafar tuvo que desmentir los bulos difundidos por el agitador Vito Quiles y el eurodiputado por Se Acabó la Fiesta (SALF) Alvise Pérez, quienes afirmaban que se estaba tirando ropa donada al vertedero. Según la concejala Empar Martín, todas las prendas eliminadas estaban dañadas o en mal estado, resultando inapropiadas para donación al poder suponer un riesgo sanitario debido a la presencia de insectos y focos de infección en ellas. Estos descartes fueron realizados siguiendo en todo momento las recomendaciones tanto de profesionales biólogos como de las autoridades sanitarias. La gestión de la emergencia se vio interrumpida para desmentir la mentira y soportar el acoso en redes sociales, mientras Vito Quiles y Alvise Pérez se concentraban en construir un relato falso. Este caso es paradigmático del modus operandi del populismo ultraderechista, que explota el sufrimiento ciudadano para sembrar desconfianza de las instituciones y erosionar la credibilidad de lo público. Desde PROA, queremos afirmar que convertir la tragedia en propaganda es un atentado contra la verdad y la cohesión democrática.",
+      "En este contexto, el lema “sólo el pueblo salva al pueblo”, atribuido a Antonio Machado, reapareció en las calles y redes sociales pero, secundando las palabras de RTVE, ese lema debe leerse con una precisión esencial: el pueblo salva al pueblo, pero no debe hacerlo sólo. Aunque la solidaridad ciudadana sea el alma de un país, las instituciones deben ser el corazón que las hace latir y bajo ningún concepto el esfuerzo vecinal puede sustituir la responsabilidad política.",
+      "Desde nuestra visión socialdemócrata, inspirada en los valores europeos de justicia social, solidaridad y confianza en lo público, afirmamos que la solidaridad ciudadana debe ser reconocida y canalizada por las instituciones y no debe ser manipulada; que la verdad y la transparencia son la mejor respuesta frente a la desinformación y el odio digital; y que la acción pública coordinada es el único medio que permite garantizar que las tragedias se conviertan en un espacio para el oportunismo político.",
+      "Hoy rendimos homenaje a las 229 vidas perdidas, a los miles de voluntarios que cruzaron “la pasarela de la solidaridad” y a los trabajadores públicos que sostuvieron la emergencia. Desde PROA reivindicamos la fuerza de un país que no olvida, que aprende y que se reconstruye con intención y empatía con el pueblo porque, como bien dice nuestro lema, su voz es nuestro rumbo. Que esta conmemoración no sea sólo un recuerdo doloroso, sino un compromiso firme: aprender de la tragedia; garantizar que la ayuda llegue a todos los afectados, sin excepción, a través del fortalecimiento de las instituciones públicas; y defender que la solidaridad nunca sea manipulada ni utilizada como herramienta de propaganda.",
+    ],
+    hastags: ["SomosProa", "TuVozNuestroRumbo", "Politicom"],
+    img: Dana,
+    altText: "Personas recogiendo lo que provoco la dana",
+  },
+];
+const parsed = JSON.stringify(posts);
+---
+
+<Layout>
+  <header>
+    <Nav />
+    <div class="mt-[5vh] bg-(--red) p-5">
+      <h1 class="text-white font-extrabold text-4xl">BLOG</h1>
+    </div>
+  </header>
+  <main class="min-h-[95vh] p-10">
+    <div class="grid grid-cols-3">
+      {
+        posts.map((p, i) => (
+          <article class="shadow-2xl p-4 bg-white rounded-lg aspect-square w-1/2 flex flex-col justify-between">
+            <Image src={p.img} alt={p.altText} />
+            <h2 class="text-gray-700 font-extrabold my-3">{p.titulo}</h2>
+            <a href="#" data-id={i} class="text-(--red) underline m-auto">
+              Ver más
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </main>
+</Layout>
+
+<script define:vars={{ parsed }}>
+  const posts = JSON.parse(parsed);
+  const body = document.querySelector("body");
+  const postsN = document.querySelectorAll("a[data-id]");
+  postsN.forEach((p) => {
+    p.addEventListener("click", (e) => {
+      e.preventDefault();
+      const id = p.dataset.id;
+      const post = posts[id];
+      body.insertAdjacentHTML(
+        "beforeend",
+        `<div id="article" class="absolute z-100 w-full top-0 left-0 p-20 flex bg-[#af79796b]">
+    <div
+      class="m-auto bg-white shadow-2xl flex flex-col w-1/2"
+    >
+      <Image src=${post.img.src} class="" alt="${post.altText}" />
+      <h2 class="text-gray-700 font-extrabold my-3 text-2xl text-center">
+        ${post.titulo}
+      </h2>
+      ${post.parrafos.map((para) => `<p class="px-10 text-justify mb-10">${para}</p>`).join("")}
+      <button id="close-modal" class="text-(--red) w-1/36 m-auto mb-10 hover:text-red-950">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="currentColor"
+          class="bi bi-x-circle-fill"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+  </div>`
+      );
+      const modal = body.querySelector("#article");
+      if (modal) {
+        const close = modal.querySelector("button");
+        close?.addEventListener("click", () => modal.remove());
+      }
+    });
+  });
+</script>
