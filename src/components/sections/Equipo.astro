@@ -79,7 +79,10 @@ const miembros = JSON.stringify(nombres);
   >
     {
       nombres.map((persona, i) => (
-        <a data-id={i} class={persona.posicion}>
+        <a
+          data-id={i}
+          class={persona.posicion + " hover:translate-y-[-10px] transition-transform cursor-pointer"}
+        >
           <Image
             src={persona.img}
             alt={persona.nombre + " " + persona.puesto}
@@ -97,7 +100,7 @@ const miembros = JSON.stringify(nombres);
     opacity: 0;
     transform: translateY(100px);
   }
-  
+
   a.an {
     animation: aparicion 1000ms ease 0s 1 forwards running;
   }
@@ -113,9 +116,8 @@ const miembros = JSON.stringify(nombres);
     }
   }
 </style>
-<script define:vars={{miembros}}>
-  const equipo = JSON.parse(miembros)
-  console.log(equipo)
+<script define:vars={{ miembros }}>
+  const equipo = JSON.parse(miembros);
   const body = document.querySelector("body");
   const members = document.querySelectorAll("a[data-id]");
   document.addEventListener("scroll", (e) => {
@@ -132,11 +134,14 @@ const miembros = JSON.stringify(nombres);
       e.preventDefault();
       const id = m.dataset.id;
       const person = equipo[id];
-      body.insertAdjacentHTML('beforeend',`<div id="imagen" class="fixed bg-[#af79796b] w-full flex top-0 h-screen">
+      body.insertAdjacentHTML(
+        "beforeend",
+        `<div id="imagen" class="fixed bg-[#af79796b] w-full flex top-0 h-screen">
     <button
-      class="absolute text-white top-20 right-10 w-10 hover:text-gray-200 cursor-pointer flex flex-col"
+    class="absolute text-white top-20 right-10 w-10 hover:text-gray-200 cursor-pointer flex flex-col"
     >
-      <svg
+    <svg
+    id="ejemplo"
         xmlns="http://www.w3.org/2000/svg"
         fill="currentColor"
         class="bi bi-x-circle-fill"
@@ -158,11 +163,15 @@ const miembros = JSON.stringify(nombres);
         <p class="md:text-2xl text-xs text-center text-white font-extrabold">${person.puesto}</p>
       </div>
     </div>
-  </div>`);
+  </div>`
+      );
       const modal = body.querySelector("#imagen");
       if (modal) {
-        const close = modal.querySelector("button");
-        close?.addEventListener("click", () => modal.remove());
+        modal.addEventListener("click", (e) => {
+          if (e.target.id == "imagen" || ['svg', 'path', 'button'].includes(e.target.nodeName)) {
+            modal.remove();
+          }
+        });
       }
     });
   });
