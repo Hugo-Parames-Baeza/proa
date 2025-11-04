@@ -1,0 +1,44 @@
+[
+    {
+        "puesto": "Jefa de Campaña",
+        "nombre": "María Nieto Romera"
+    },
+    {
+        "puesto": "Candidato",
+        "nombre": "Kamal El Faghloumi"
+    },
+    {
+        "puesto": "Portavoz",
+        "nombre": "Kevin Melo Riascos"
+    },
+    {
+        "puesto": "Estrategia",
+        "nombre": "Denisa Marina Vrabie"
+    },
+    {
+        "puesto": "Party tank de Ideologia",
+        "nombre": "Daniela Mirabelli Huete"
+    },
+    {
+        "puesto": "Party tank de Investigacion",
+        "nombre": "Patricia Marco Cortés"
+    },
+    {
+        "puesto": "Protocolo y Eventos",
+        "nombre": "Macarena Fuentes Gómez"
+    },
+    {
+        "puesto": "RRPP",
+        "nombre": "Leire Martínez Román"
+    },
+    {
+        "puesto": "Creacion de contenido",
+        "nombre": "Maria Alejandra Tovar",
+        "posicion": "col-start-2"
+    },
+    {
+        "puesto": "Creacion de Contenido",
+        "nombre": "Francisco Javier Botella Retamal",
+        "posicion": "col-start-3"
+    }
+]

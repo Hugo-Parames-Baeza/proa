@@ -1,0 +1,72 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Nav from "../components/header/Nav.astro";
+import { Image } from "astro:assets";
+import cap1 from "../assets/images/podcast/capitulo_1.png";
+const imagenes = [cap1];
+import capitulos from "../assets/db/capitulos.json";
+---
+
+<Layout>
+  <header>
+    <Nav />
+    <div class="mt-[5vh] bg-(--red) p-5">
+      <h1 class="text-white font-extrabold text-4xl">PODCAST</h1>
+    </div>
+  </header>
+  <main class="min-h-[95vh] p-10">
+    <div class="lg:grid lg:grid-cols-3 md:flex flex-col">
+      {
+        capitulos.map((p, i) => (
+          <article class="shadow-2xl relative bg-white m-auto rounded-lg aspect-square md:w-2/3 flex flex-col justify-between">
+            <Image src={imagenes[i]} alt={p.altText} class="rounded-t-lg" />
+            <h2 class="text-gray-700 font-extrabold m-auto px-4 text-justify md:text-2xl lg:text-lg">
+              {p.titulo}
+            </h2>
+            <a
+              href="#"
+              data-id={i}
+              class="text-(--red) underline m-auto bg-[#af79796b] opacity-0 hover:opacity-100 transition-opacity absolute w-full rounded-lg h-full flex"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                class="bi bi-play-circle-fill w-2/8 text-white m-auto"
+                viewBox="0 0 16 16"
+              >
+                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z" />
+              </svg>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </main>
+</Layout>
+<script define:vars={{ capitulos, imagenes }}>
+  const body = document.querySelector("body");
+  const capitulosN = document.querySelectorAll("a[data-id]");
+  capitulosN.forEach((p) => {
+    p.addEventListener("click", (e) => {
+      e.preventDefault();
+      const id = p.dataset.id;
+      const capitulo = capitulos[id];
+      body.insertAdjacentHTML(
+        "beforeend",
+        `<div id="video" class="fixed h-full z-100 w-full top-0 left-0 lg:p-20 flex flex-col bg-[#af79796b] cursor-pointer">
+    
+      <iframe class="m-auto w-full md:w-3/4 aspect-video" src="${capitulo.enlace}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      
+        </div>`
+      );
+      const modal = body.querySelector("#video");
+      if (modal) {
+        modal.addEventListener("click", (e) => {
+          if (e.target.id == "video") {
+            modal.remove();
+          }
+        });
+      }
+    });
+  });
+</script>

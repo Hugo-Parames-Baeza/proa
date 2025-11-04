@@ -1,0 +1,12 @@
+[
+  {
+    "titulo": "BLOG",
+    "position": "text-end",
+    "enlace":"blog"
+  },
+  {
+    "titulo": "PODCAST",
+    "position": "text-center",
+    "enlace":"/podcast"
+  }
+]
