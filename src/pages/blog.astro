@@ -3,8 +3,9 @@ import Layout from "../layouts/Layout.astro";
 import Nav from "../components/header/Nav.astro";
 import { Image } from "astro:assets";
 import Dana from "../assets/images/blog.webp";
+import Guernica from "../assets/images/blog_9nov.jpg";
 import posts from "../assets/db/posts.json";
-const imagenes = [Dana];
+const imagenes = [Dana, Guernica];
 ---
 
 <Layout>
@@ -19,7 +20,7 @@ const imagenes = [Dana];
       {
         posts.map((p, i) => (
           <article class="shadow-2xl p-4 bg-white m-auto rounded-lg aspect-square md:w-2/3 flex flex-col justify-between">
-            <Image src={imagenes[i]} alt={p.altText} />
+            {imagenes[i]&&(<Image src={imagenes[i]} alt={p.altText?p.altText:""} />)}
             <h2 class="text-gray-700 font-extrabold my-3 text-justify md:text-2xl lg:text-lg">{p.titulo}</h2>
             <div class="flex gap-2 mb-2 flex-wrap">
               {
