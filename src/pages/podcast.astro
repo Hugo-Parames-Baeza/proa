@@ -15,12 +15,12 @@ import capitulos from "../assets/db/capitulos.json";
     </div>
   </header>
   <main class="min-h-[95vh] p-10">
-    <div class="lg:grid lg:grid-cols-3 md:flex flex-col">
+    <div class="flex flex-col lg:flex-row gap-4 flex-wrap justify-evenly">
       {
         capitulos.map((p, i) => (
-          <article class="shadow-2xl relative bg-white m-auto rounded-lg aspect-square md:w-2/3 flex flex-col justify-between">
+          <article class="shadow-2xl relative bg-white rounded-lg md:w-3/4 m-auto lg:m-0 lg:w-1/4 flex flex-col justify-between">
             <Image src={imagenes[i]} alt={p.altText} class="rounded-t-lg" />
-            <h2 class="text-gray-700 font-extrabold m-auto px-4 text-justify md:text-2xl lg:text-lg">
+            <h2 class="text-gray-700 m-3 font-extrabold px-4 text-justify md:text-2xl lg:text-lg">
               {p.titulo}
             </h2>
             <a
