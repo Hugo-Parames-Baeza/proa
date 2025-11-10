@@ -1,20 +1,8 @@
 ---
 import candidato from "../../assets/images/novedad.webp";
 import novedad from "../../assets/images/blog_novedad.jpg";
-const novedades = [
-  {
-    titulo: "BLOG",
-    position: "text-end",
-    img: `url(${novedad.src})`,
-    enlace:'blog'
-  },
-  {
-    titulo: "PODCAST",
-    position: "text-center",
-    img: `url(${candidato.src})`,
-    enlace:'#'
-  },
-];
+const imagenes = [`url(${novedad.src})`, `url(${candidato.src})`];
+import novedades from "../../assets/db/novedades.json";
 ---
 
 <section
@@ -31,11 +19,11 @@ const novedades = [
     class="my-4 flex md:w-3/4 lg:w-1/2 md:mx-auto px-5 justify-center items-center gap-4 md:gap-8"
   >
     {
-      novedades.map((e) => (
+      novedades.map((e,i) => (
         <div
           id="bgk"
           class="flex-1 aspect-square bg-cover bg-center p-2 box-border flex flex-col justify-between items-start rounded-sm"
-          style={"background-image: "+e.img}
+          style={"background-image: "+imagenes[i]}
         >
           <h3 class={"text-white w-full md:mt-2 lg:mt-3 font-bold md:text-2xl lg:text-4xl " + e.position}>
             {e.titulo}
